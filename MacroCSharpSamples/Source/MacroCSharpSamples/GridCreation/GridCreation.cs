@@ -144,7 +144,10 @@ namespace Revit.SDK.Samples.GridCreation.CS
         private  CurveArray GetSelectedCurves(ThisDocument document)
         {
             CurveArray selectedCurves = m_doc.Document.Application.Create.NewCurveArray();
-            ElementSet elements = document.Selection.Elements;
+            ElementSet elements = new ElementSet();
+            foreach (var elementid in  document.Selection.GetElementIds()) {
+            	elements.Insert(m_doc.Document.GetElement(elementid));
+            }
             foreach (Autodesk.Revit.DB.Element element in elements)
             {
                 if ((element is ModelLine) || (element is ModelArc))
@@ -178,7 +181,10 @@ namespace Revit.SDK.Samples.GridCreation.CS
         public static ICollection<ElementId> GetSelectedModelLinesAndArcs(ThisDocument thisDocument)
         {
         	var tmpIds = new List<ElementId>();
-            ElementSet elements = thisDocument.Selection.Elements;
+        	ElementSet elements = new ElementSet();
+        	foreach (ElementId elementid in thisDocument.Selection.GetElementIds()) {
+        		elements.Insert(thisDocument.Document.GetElement(elementid));
+        	}
             foreach (Autodesk.Revit.DB.Element element in elements)
             {
                 if ((element is ModelLine) || (element is ModelArc) || (element is DetailLine) || (element is DetailArc))
@@ -198,11 +204,11 @@ namespace Revit.SDK.Samples.GridCreation.CS
         private static DisplayUnitType GetLengthUnitType(Document document)
         {
             UnitType unittype = UnitType.UT_Length;
-            ProjectUnit projectUnit = document.ProjectUnit;
+            Units projectUnit = document.GetUnits();
             try
             {
-                Autodesk.Revit.DB.FormatOptions formatOption = projectUnit.get_FormatOptions(unittype);
-                return formatOption.Units;
+                Autodesk.Revit.DB.FormatOptions formatOption = projectUnit.GetFormatOptions(unittype);
+                return formatOption.DisplayUnits;
             }
             catch (System.Exception /*e*/)
             {

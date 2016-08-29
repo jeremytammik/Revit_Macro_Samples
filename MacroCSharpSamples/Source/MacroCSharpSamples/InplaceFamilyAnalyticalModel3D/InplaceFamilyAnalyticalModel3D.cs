@@ -70,18 +70,18 @@ namespace Revit.SDK.Samples.InplaceFamilyAnalyticalModel3D.CS
             try
             {
                 //iterate through the selection picking out family instances that have a 3D analytical model
-                SelElementSet selElements = m_doc.Selection.Elements;
+                ICollection<ElementId> selElements = m_doc.Selection.GetElementIds();
 
-                if (0 == selElements.Size)
+                if (0 == selElements.Count)
                 {
                     MessageBox.Show("Please selected some in-place family instance with AnalyticalMode.",
                         "InplaceFamilyAnalyticalModel3D");
                     return;
                 }
 
-                foreach (Autodesk.Revit.DB.Element element in selElements)
+                foreach (Autodesk.Revit.DB.ElementId elementid in selElements)
                 {
-                    FamilyInstance familyInstance = element as FamilyInstance;
+                	FamilyInstance familyInstance = m_doc.Document.GetElement(elementid) as FamilyInstance;
 
                     if (null == familyInstance)
                     {

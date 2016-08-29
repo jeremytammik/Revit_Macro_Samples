@@ -271,9 +271,9 @@ namespace Revit.SDK.Samples.CreateBeamsColumnsBraces.CS
                     Family f = ee as Family;
                     if (null != f)
                     {
-                        foreach (object symbol in f.Symbols)
+                    	foreach (ElementId symbolID in f.GetFamilySymbolIds())
                         {
-                            FamilySymbol familyType = symbol as FamilySymbol;
+                    		FamilySymbol familyType = m_doc.Document.GetElement(symbolID) as FamilySymbol;
                             if (null == familyType)
                             {
                                 continue;
@@ -382,7 +382,7 @@ namespace Revit.SDK.Samples.CreateBeamsColumnsBraces.CS
             LocationCurve beamCurve = beam.Location as LocationCurve;
             if (null != beamCurve)
             {
-                Line line = m_doc.Document.Application.Create.NewLineBound(startPoint, endPoint);
+                Line line = Line.CreateBound(startPoint, endPoint);
                 beamCurve.Curve = line;
             }
         }
@@ -427,7 +427,7 @@ namespace Revit.SDK.Samples.CreateBeamsColumnsBraces.CS
             LocationCurve braceCurve1 = firstBrace.Location as LocationCurve;
             if (null != braceCurve1)
             {
-                Line line = m_doc.Document.Application.Create.NewLineBound(startPoint, middlePoint);
+                Line line = Line.CreateBound(startPoint, middlePoint);
                 braceCurve1.Curve = line;
             }
 
@@ -441,7 +441,7 @@ namespace Revit.SDK.Samples.CreateBeamsColumnsBraces.CS
             LocationCurve braceCurve2 = secondBrace.Location as LocationCurve;
             if (null != braceCurve2)
             {
-                Line line = m_doc.Document.Application.Create.NewLineBound(endPoint, middlePoint);
+                Line line = Line.CreateBound(endPoint, middlePoint);
                 braceCurve2.Curve = line;
             }
 

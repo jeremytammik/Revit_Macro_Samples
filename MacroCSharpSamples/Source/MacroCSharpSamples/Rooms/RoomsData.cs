@@ -218,7 +218,8 @@ namespace Revit.SDK.Samples.Rooms.CS
                 UV point = m_application.Create.NewUV(u, v);
 
                 //create room tag
-                m_thisDocument.Document.Create.NewRoomTag(tmpRoom, point, null);
+                
+                m_thisDocument.Document.Create.NewRoomTag(new LinkElementId(tmpRoom.Id), point, null);
             }
         }
 

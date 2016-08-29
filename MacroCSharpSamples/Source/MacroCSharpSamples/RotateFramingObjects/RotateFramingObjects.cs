@@ -27,6 +27,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using Autodesk;
 using Autodesk.Revit;
 using Autodesk.Revit.DB;
@@ -94,7 +95,13 @@ namespace Revit.SDK.Samples.RotateFramingObjects.CS
 		public void Run()
 		{
 			RotateFramingObjectsForm displayForm = new RotateFramingObjectsForm(this);
-            ElementSet selection = m_doc.Selection.Elements;
+			ElementSet selection = new ElementSet();
+			ICollection<ElementId> sel ;
+			
+			foreach (ElementId elementid in m_doc.Selection.GetElementIds()) {
+				selection.Insert(m_doc.Document.GetElement(elementid));
+			}
+            
 			bool isSingle = true;                   //selection is single object
 			bool isAllFamilyInstance = true;  //all is not familyInstance
 			
@@ -151,7 +158,9 @@ namespace Revit.SDK.Samples.RotateFramingObjects.CS
 						{
 							// other familyInstance can not be rotated
                             MessageBox.Show("Can not deal with it.", "RotateFramingObjects");
-							m_doc.Selection.Elements.Insert(familyComponent);
+							sel = m_doc.Selection.GetElementIds();
+                            sel.Add(familyComponent.Id);
+							m_doc.Selection.SetElementIds(sel);
 							return;
 						}
 					}
@@ -160,12 +169,16 @@ namespace Revit.SDK.Samples.RotateFramingObjects.CS
 						if (isSingle)
 						{
                             MessageBox.Show("It is a Non-FamilyInstance.", "RotateFramingObjects");
-							m_doc.Selection.Elements.Insert(e);
+                            sel = m_doc.Selection.GetElementIds();
+                            sel.Add(e.Id);
+							m_doc.Selection.SetElementIds(sel);
 							return;
 						}
 						// there is some objects is not familyInstance
 						//MessageBox.Show("There is Non-FamilyInstance.", "RotateFramingObjects");
-						m_doc.Selection.Elements.Insert(e);
+						sel = m_doc.Selection.GetElementIds();
+						sel.Add(e.Id);
+						m_doc.Selection.SetElementIds(sel);
 						isAllFamilyInstance = false;
 					}				
 				}
@@ -203,7 +216,10 @@ namespace Revit.SDK.Samples.RotateFramingObjects.CS
 		/// </summary>		
 		public void RotateElement()
 		{
-			ElementSet selection = m_doc.Selection.Elements;			
+			ElementSet selection = new ElementSet();
+			foreach (ElementId elementid in m_doc.Selection.GetElementIds()) {
+				selection.Insert(m_doc.Document.GetElement(elementid));
+			}
 			foreach(Autodesk.Revit.DB.Element e in selection )
 			{
 				FamilyInstance familyComponent = e as FamilyInstance;
@@ -255,7 +271,7 @@ namespace Revit.SDK.Samples.RotateFramingObjects.CS
                     //existing rotation
                     XYZ directionPoint = m_doc.Document.Application.Create.NewXYZ(0, 0, 1);
                     // define the vector of axis
-                    Autodesk.Revit.DB.Line rotateAxis = m_doc.Document.Application.Create.NewLineUnbound(insertPoint, directionPoint);
+                    Autodesk.Revit.DB.Line rotateAxis = Line.CreateBound(insertPoint, directionPoint);
                     double rotateDegree = m_receiveRotationTextBox * Math.PI / 180;
                     // rotate column by rotate method
                     if (m_isAbsoluteChecked)

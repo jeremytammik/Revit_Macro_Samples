@@ -52,7 +52,7 @@ namespace Revit.SDK.Samples.SlabProperties.CS
         #region Class member variables
         ThisDocument m_doc;
 
-        ElementSet m_slabComponent;  // the selected Slab component
+        ICollection<ElementId> m_slabComponentId;  // the selected Slab component
         Floor m_slabFloor; // Floor 
         CompoundStructureLayer m_slabLayer; // Structure Layer 
         IList<CompoundStructureLayer> m_slabLayerCollection; // Structure Layer collection
@@ -299,26 +299,27 @@ namespace Revit.SDK.Samples.SlabProperties.CS
         /// </summary>
         /// <param name="revit">The revit object for the active instance of Autodesk Revit.</param>
         /// <returns>A value that signifies if your intitialization was successful for true or failed for false.</returns>
-        private bool Initialize(ThisDocument doc)
+        private bool Initialize(ThisDocument uidoc)
         {
-            m_slabComponent = doc.Selection.Elements;
+        	m_slabComponentId = uidoc.Selection.GetElementIds();
 
             // There must be exactly one slab selected
-            if (m_slabComponent.IsEmpty)
+            if (m_slabComponentId.Count==0)
             {
                 // nothing selected
                 MessageBox.Show("Please select a slab.");
                 return false;
             }
-            else if (1 != m_slabComponent.Size)
+            else if (1 != m_slabComponentId.Count)
             {
                 // too many things selected
                 MessageBox.Show("Please select only one slab.");
                 return false;
             }
 
-            foreach (Element e in m_slabComponent)
+            foreach (ElementId eid in m_slabComponentId)
             {
+            	Element e = uidoc.Document.GetElement(eid);
                 // If the element isn't a slab, give the message and return failure. 
                 // Else find out its Level, Type name, and set the Span Direction properties. 
                 if ("Autodesk.Revit.DB.Floor" != e.GetType().FullName)
@@ -336,7 +337,7 @@ namespace Revit.SDK.Samples.SlabProperties.CS
                 m_numberOfLayers = m_slabLayerCollection.Count;
 
                 // Get the Level property by the floor's Level property
-                m_level = m_slabFloor.Level.Name;
+                m_level = m_doc.Document.GetElement(m_slabFloor.LevelId).Name;
 
                 // Get the Type name property by the floor's FloorType property
                 m_typeName = m_slabFloor.FloorType.Name;

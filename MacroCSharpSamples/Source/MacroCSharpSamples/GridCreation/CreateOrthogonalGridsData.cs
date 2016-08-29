@@ -322,11 +322,11 @@ namespace Revit.SDK.Samples.GridCreation.CS
                         // Create a line according to the bubble location
                         if (m_xBubbleLoc == BubbleLocation.StartPoint)
                         {
-                            line = m_thisDoc.Document.Application.Create.NewLineBound(startPoint, endPoint);
+                            line = Line.CreateBound(startPoint, endPoint);
                         }
                         else
                         {
-                            line = m_thisDoc.Document.Application.Create.NewLineBound(endPoint, startPoint);
+                            line = Line.CreateBound(endPoint, startPoint);
                         }
                     }
                     catch (System.ArgumentException)
@@ -341,8 +341,8 @@ namespace Revit.SDK.Samples.GridCreation.CS
                     }                    
 
                     // Create grid with line
-                    grid = m_thisDoc.Document.Create.NewGrid(line);
-
+                    grid = Grid.Create(m_thisDoc.Document,line);
+					
                     // Set label of first horizontal grid
                     if (grid != null && i == 0)
                     {
@@ -403,11 +403,11 @@ namespace Revit.SDK.Samples.GridCreation.CS
                         // Create a line according to the bubble location
                         if (m_yBubbleLoc == BubbleLocation.StartPoint)
                         {
-                            line = m_thisDoc.Document.Application.Create.NewLineBound(startPoint, endPoint);
+                            line = Line.CreateBound(startPoint, endPoint);
                         }
                         else
                         {
-                            line = m_thisDoc.Document.Application.Create.NewLineBound(endPoint, startPoint);
+                            line = Line.CreateBound(endPoint, startPoint);
                         }
                     }
                     catch (System.ArgumentException)
@@ -422,7 +422,7 @@ namespace Revit.SDK.Samples.GridCreation.CS
                     } 
 
                     // Create grid with line
-                    grid = m_thisDoc.Document.Create.NewGrid(line);
+                    grid = Grid.Create(m_thisDoc.Document,line);
 
                     // Set label of first vertical grid
                     if (grid != null && j == 0)

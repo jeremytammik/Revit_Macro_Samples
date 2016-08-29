@@ -92,7 +92,11 @@ namespace Revit.SDK.Samples.StructuralLayerFunction.CS
             // 
             // Get the selected floor
             Selection choices = m_doc.Selection;
-            ElementSet collection = choices.Elements;
+             ElementSet collection = new ElementSet();
+            foreach (var elementid in  choices.GetElementIds()) {
+            	collection.Insert(m_doc.Document.GetElement(elementid));
+            }
+            
             //
             // Only allow to select one floor, or else report the failure
             if (1 != collection.Size)

@@ -401,15 +401,15 @@ namespace Revit.SDK.Samples.GridCreation.CS
                     // Create a line according to the bubble location
                     if (m_lineFirstBubbleLoc == BubbleLocation.StartPoint)
                     {
-                        line = m_doc.Document.Application.Create.NewLineBound(startPoint, endPoint);
+                        line = Line.CreateBound(startPoint, endPoint);
                     }
                     else
                     {
-                        line = m_doc.Document.Application.Create.NewLineBound(endPoint, startPoint);
+                        line = Line.CreateBound(endPoint, startPoint);
                     }
 
                     // Create grid with line
-                    Grid grid = m_doc.Document.Create.NewGrid(line);
+                    Grid grid = Grid.Create(m_doc.Document,line);
 
                     // Set label of first radial grid
                     if (grid != null && i == 0)
@@ -581,14 +581,14 @@ namespace Revit.SDK.Samples.GridCreation.CS
 
             if (bubLoc == BubbleLocation.StartPoint)
             {
-                arc = m_doc.Document.Application.Create.NewArc(startPoint, endPoint, midPoint);
+                arc = Arc.Create(startPoint, endPoint, midPoint);
             }
             else
             {
-                arc = m_doc.Document.Application.Create.NewArc(endPoint, startPoint, midPoint);
+                arc = Arc.Create(endPoint, startPoint, midPoint);
             }
 
-            return m_doc.Document.Create.NewGrid(arc);
+            return Grid.Create(m_doc.Document,arc);
         }
         #endregion
     }

@@ -264,18 +264,18 @@ namespace Revit.SDK.Samples.GridCreation.CS
             Arc lowerArc;
             if (m_bubbleLocation == BubbleLocation.StartPoint)
             {
-                upperArc = m_revit.Create.NewArc(XRightPoint, XLeftPoint, YUpperPoint);
-                lowerArc = m_revit.Create.NewArc(XLeftPoint, XRightPoint, YLowerPoint);
+                upperArc = Arc.Create(XRightPoint, XLeftPoint, YUpperPoint);
+                lowerArc = Arc.Create(XLeftPoint, XRightPoint, YLowerPoint);
             }
             else
             {
-                upperArc = m_revit.Create.NewArc(XLeftPoint, XRightPoint, YUpperPoint);
-                lowerArc = m_revit.Create.NewArc(XRightPoint, XLeftPoint, YLowerPoint);
+                upperArc = Arc.Create(XLeftPoint, XRightPoint, YUpperPoint);
+                lowerArc = Arc.Create(XRightPoint, XLeftPoint, YLowerPoint);
             }
 
             // Create arc grids
-            gridUpper = m_thisDoc.Document.Create.NewGrid(upperArc);
-            gridLower = m_thisDoc.Document.Create.NewGrid(lowerArc);
+            gridUpper = Grid.Create(m_thisDoc.Document,upperArc);
+            gridLower = Grid.Create(m_thisDoc.Document,lowerArc);
 
             if (gridUpper != null && isFirst)
             {
@@ -304,18 +304,18 @@ namespace Revit.SDK.Samples.GridCreation.CS
 
             if (m_bubbleLocation == BubbleLocation.StartPoint)
             {
-                grid = m_thisDoc.Document.Create.NewGrid(arc); 
+                grid = Grid.Create(m_thisDoc.Document,arc); 
             }
             else
             {
                 // Get start point, end point of the arc and the middle point on it 
-                XYZ startPoint = arc.get_EndPoint(0);
-                XYZ endPoint = arc.get_EndPoint(1);
+                XYZ startPoint = arc.GetEndPoint(0);
+                XYZ endPoint = arc.GetEndPoint(1);
                 bool clockwise = (arc.Normal.Z == -1);
                 
                 // Get start angel and end angel of arc
-                double startDegree = arc.get_EndParameter(0);
-                double endDegree = arc.get_EndParameter(1);
+                double startDegree = arc.GetEndParameter(0);
+                double endDegree = arc.GetEndParameter(1);
 
                 // Handle the case that the arc is clockwise
                 if (clockwise && startDegree > 0 && endDegree > 0)
@@ -343,10 +343,10 @@ namespace Revit.SDK.Samples.GridCreation.CS
 
                 XYZ midPoint = m_revit.Create.NewXYZ(arc.Center.X + arc.Radius * Math.Cos(sumDegree),
                     arc.Center.Y + arc.Radius * Math.Sin(sumDegree), 0);
-                Arc reversedArc = m_revit.Create.NewArc(endPoint, startPoint, midPoint);
+                Arc reversedArc = Arc.Create(endPoint, startPoint, midPoint);
 
                 //Create grid
-                grid = m_thisDoc.Document.Create.NewGrid(reversedArc);
+                grid = Grid.Create(m_thisDoc.Document,reversedArc);
             }
 
             return grid;
@@ -364,14 +364,14 @@ namespace Revit.SDK.Samples.GridCreation.CS
             // Create grid according to the bubble location
             if (m_bubbleLocation == BubbleLocation.StartPoint)
             {
-                grid = m_thisDoc.Document.Create.NewGrid(line);
+                grid = Grid.Create(m_thisDoc.Document,line);
             }
             else
             {
-                XYZ startPoint = line.get_EndPoint(1);
-                XYZ endPoint = line.get_EndPoint(0);
-                Line reversedLine = m_revit.Create.NewLineBound(startPoint, endPoint);
-                grid = m_thisDoc.Document.Create.NewGrid(reversedLine);
+                XYZ startPoint = line.GetEndPoint(1);
+                XYZ endPoint = line.GetEndPoint(0);
+                Line reversedLine = Line.CreateBound(startPoint, endPoint);
+                grid = Grid.Create(m_thisDoc.Document,reversedLine);
             }
 
             return grid;

@@ -24,6 +24,7 @@ using System;
 using System.Windows.Forms;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using Autodesk.Revit;
 using Autodesk.Revit.DB;
@@ -60,7 +61,13 @@ namespace Revit.SDK.Samples.DeleteObject.CS
         /// </summary>
         public void Run()
         {
-            ElementSet collection = m_doc.Selection.Elements;
+        	ElementSet collection = new ElementSet();
+        	foreach(var eid in m_doc.Selection.GetElementIds()){
+        		collection.Insert(m_doc.Document.GetElement(eid));
+        	}
+        	
+        	
+        	
             // check user selection
             if (collection.Size < 1)
             {
@@ -79,7 +86,7 @@ namespace Revit.SDK.Samples.DeleteObject.CS
                 while (MoreValue)
                 {
                     Element component = e.Current as Element;
-                    m_doc.Document.Delete(component);
+                    m_doc.Document.Delete(component.Id);
                     MoreValue = e.MoveNext();
                 }
 
@@ -88,10 +95,9 @@ namespace Revit.SDK.Samples.DeleteObject.CS
             catch
             {
                 // if revit threw an exception, try to catch it
-                foreach (Element c in collection)
-                {
-                    m_doc.Selection.Elements.Insert(c);
-                }
+                List<ElementId> CollectionId = new List<ElementId>();
+                foreach (Element c in collection) CollectionId.Add(c.Id);
+                m_doc.Selection.SetElementIds(CollectionId);
                 MessageBox.Show("Element(s) can't be deleted.", "DeleteObject");
                 return;
             }
