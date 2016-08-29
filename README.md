@@ -1,9 +1,10 @@
 # Revit_Macro_Samples
 
-Revit macro samples from provided in the Revit SDK Macro Samples/Revit_Macro_Samples.rvt project.
+Revit macro samples provided in the Revit SDK `Macro Samples` `Revit_Macro_Samples.rvt` project.
 
 For more details, please refer to
-[The Building Coder](http://thebuildingcoder.typepad.com) discussion of ...
+[The Building Coder](http://thebuildingcoder.typepad.com) comment
+on [updating the Revit macro samples for Revit 2017](http://thebuildingcoder.typepad.com/blog/2016/04/whats-new-in-the-revit-2017-api.html#comment-2862033662).
 
 
 ## Author
