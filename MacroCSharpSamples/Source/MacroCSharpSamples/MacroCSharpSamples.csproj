@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{3BC65AFE-3B42-4BDB-933C-5057976B03B2}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MacroCSharpSamples</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\pengx\AppData\Roaming\ICSharpCode\HostedSharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>False</Optimize>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\..\Addin\</OutputPath>
+    <AssemblyName>MacroCSharpSamples</AssemblyName>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <BaseInterMediateOutputPath>obj\</BaseInterMediateOutputPath>
+    <InterMediateOutputPath>obj\Debug</InterMediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="..\..\..\..\..\..\RevitAPI.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="..\..\..\..\..\..\RevitAPIUI.dll">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CapitalizeText\CapitalizeText.cs" />
+    <Compile Include="CreateBeamsColumnsBraces\CreateBeamsColumnsBraces.cs" />
+    <Compile Include="CreateBeamsColumnsBraces\CreateBeamsColumnsBracesForm.cs" />
+    <Compile Include="DeleteObject\DeleteObject.cs" />
+    <Compile Include="GridCreation\CreateOrthogonalGridsData.cs" />
+    <Compile Include="GridCreation\CreateOrthogonalGridsForm.cs" />
+    <Compile Include="GridCreation\CreateOrthogonalGridsForm.Designer.cs">
+      <DependentUpon>CreateOrthogonalGridsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridCreation\CreateRadialAndArcGridsData.cs" />
+    <Compile Include="GridCreation\CreateRadialAndArcGridsForm.cs" />
+    <Compile Include="GridCreation\CreateRadialAndArcGridsForm.Designer.cs">
+      <DependentUpon>CreateRadialAndArcGridsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridCreation\CreateWithSelectedCurvesForm.cs" />
+    <Compile Include="GridCreation\CreateWithSelectedCurvesForm.Designer.cs">
+      <DependentUpon>CreateWithSelectedCurvesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridCreation\CreateWithSeletedCurvesData.cs" />
+    <Compile Include="GridCreation\EnumsAndValues.cs" />
+    <Compile Include="GridCreation\GridCreation.cs" />
+    <Compile Include="GridCreation\GridCreationOptionData.cs" />
+    <Compile Include="GridCreation\GridCreationOptionForm.cs" />
+    <Compile Include="GridCreation\GridCreationOptionForm.Designer.cs">
+      <DependentUpon>GridCreationOptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridCreation\GridCreationProperties\GridCreationResources.Designer.cs" />
+    <Compile Include="GridCreation\Properties\Resources.Designer.cs" />
+    <Compile Include="GridCreation\Unit.cs" />
+    <Compile Include="GridCreation\Validation.cs" />
+    <Compile Include="InplaceFamilyAnalyticalModel3D\InplaceFamilyAnalyticalModel3D.cs" />
+    <Compile Include="ProjectInfo\Command.cs" />
+    <Compile Include="ProjectInfo\Converters\AngleConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\CityConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\ConstructionWrapperConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\Converters.cs" />
+    <Compile Include="ProjectInfo\Converters\ElementIdConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\ProjectLocationConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\RevitEnumConverter.cs" />
+    <Compile Include="ProjectInfo\Converters\TimeZoneConverter.cs" />
+    <Compile Include="ProjectInfo\ProjectInfoForm.cs" />
+    <Compile Include="ProjectInfo\ProjectInfoForm.Designer.cs">
+      <DependentUpon>ProjectInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInfo\RevitStartInfo.cs" />
+    <Compile Include="ProjectInfo\RevitVersionAttribute.cs" />
+    <Compile Include="ProjectInfo\Wrappers\ConstructionWrapper.cs" />
+    <Compile Include="ProjectInfo\Wrappers\EnergyDataSettingsWrapper.cs" />
+    <Compile Include="ProjectInfo\Wrappers\MEPBuildingConstructionWrapper.cs" />
+    <Compile Include="ProjectInfo\Wrappers\ProjectInfoWrapper.cs" />
+    <Compile Include="ProjectInfo\Wrappers\SiteLocationWrapper.cs" />
+    <Compile Include="ProjectInfo\Wrappers\WrapperCustomDescriptor.cs" />
+    <Compile Include="ProjectInfo\Wrappers\Wrappers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QuickPrint\QuickPrint.cs" />
+    <Compile Include="QuickPrint\QuickPrintDialog.cs" />
+    <Compile Include="QuickPrint\QuickPrintDialog.Designer.cs">
+      <DependentUpon>QuickPrintDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rooms\Command.cs" />
+    <Compile Include="Rooms\RoomInfoForm.cs" />
+    <Compile Include="Rooms\RoomInfoForm.designer.cs">
+      <DependentUpon>RoomInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rooms\RoomsData.cs" />
+    <Compile Include="RotateFramingObjects\RotateFramingObjects.cs" />
+    <Compile Include="RotateFramingObjects\RotateFramingObjectsForm.cs" />
+    <Compile Include="SearchAndReplaceText\FindAndReplaceDialog.cs" />
+    <Compile Include="SearchAndReplaceText\FindAndReplaceDialog.Designer.cs">
+      <DependentUpon>FindAndReplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchAndReplaceText\FindAndReplaceText.cs" />
+    <Compile Include="SearchAndReplaceWinType\FindAndReplaceWinType.cs" />
+    <Compile Include="SlabProperties\Command.cs" />
+    <Compile Include="SlabProperties\SlabProperitiesForm.cs" />
+    <Compile Include="StructuralLayerFunction\Command.cs" />
+    <Compile Include="StructuralLayerFunction\StructuralLayerFunctionForm.cs" />
+    <Compile Include="ThisDocument.cs" />
+    <Compile Include="ThisDocument.Designer.cs">
+      <DependentUpon>ThisDocument.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CapitalizeText" />
+    <Folder Include="CreateBeamsColumnsBraces" />
+    <Folder Include="DeleteObject" />
+    <Folder Include="GridCreation" />
+    <Folder Include="GridCreation\GridCreationProperties" />
+    <Folder Include="GridCreation\Properties" />
+    <Folder Include="InplaceFamilyAnalyticalModel3D" />
+    <Folder Include="ProjectInfo" />
+    <Folder Include="ProjectInfo\Converters" />
+    <Folder Include="ProjectInfo\Wrappers" />
+    <Folder Include="Properties" />
+    <Folder Include="QuickPrint" />
+    <Folder Include="Rooms" />
+    <Folder Include="RotateFramingObjects" />
+    <Folder Include="SearchAndReplaceText" />
+    <Folder Include="SearchAndReplaceWinType" />
+    <Folder Include="SlabProperties" />
+    <Folder Include="StructuralLayerFunction" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CreateBeamsColumnsBraces\CreateBeamsColumnsBracesForm.resx">
+      <DependentUpon>CreateBeamsColumnsBracesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridCreation\CreateOrthogonalGridsForm.resx">
+      <DependentUpon>CreateOrthogonalGridsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridCreation\CreateRadialAndArcGridsForm.resx">
+      <DependentUpon>CreateRadialAndArcGridsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridCreation\CreateWithSelectedCurvesForm.resx">
+      <DependentUpon>CreateWithSelectedCurvesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridCreation\GridCreationOptionForm.resx">
+      <DependentUpon>GridCreationOptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridCreation\GridCreationProperties\GridCreationResources.resx" />
+    <EmbeddedResource Include="GridCreation\Properties\Resources.resx" />
+    <EmbeddedResource Include="ProjectInfo\ProjectInfoForm.resx">
+      <DependentUpon>ProjectInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="QuickPrint\QuickPrintDialog.resx">
+      <DependentUpon>QuickPrintDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rooms\RoomInfoForm.resx">
+      <DependentUpon>RoomInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RotateFramingObjects\RotateFramingObjectsForm.resx">
+      <DependentUpon>RotateFramingObjectsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchAndReplaceText\FindAndReplaceDialog.resx">
+      <DependentUpon>FindAndReplaceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlabProperties\SlabProperitiesForm.resx">
+      <DependentUpon>SlabProperitiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StructuralLayerFunction\StructuralLayerFunctionForm.resx">
+      <DependentUpon>StructuralLayerFunctionForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>
