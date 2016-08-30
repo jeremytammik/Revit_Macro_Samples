@@ -1,6 +1,6 @@
 # Revit_Macro_Samples
 
-Revit macro samples provided in the Revit SDK `Macro Samples` `Revit_Macro_Samples.rvt` project.
+C# source code of the Revit macro samples provided in the Revit SDK `Macro Samples` `Revit_Macro_Samples.rvt` project.
 
 For more details, please refer
 to [The Building Coder](http://thebuildingcoder.typepad.com) discussion
